@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DeepSonix develops AI-enabled ultrasonic non-destructive testing solutions for semiconductor inspection.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#101c22">
+  <title>DeepSonix | See Beyond the Surface</title>
+  <style>
+    :root {
+      --ink: #101c22;
+      --ink-soft: #33444c;
+      --paper: #ffffff;
+      --mist: #f3f7f6;
+      --line: #d9e3e0;
+      --teal: #16877f;
+      --teal-dark: #0d665f;
+      --lime: #b9d35b;
+      --coral: #e46f51;
+      --max: 1180px;
+      --header: 74px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header) + 18px); }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, "Segoe UI", "Noto Sans", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button, input, textarea { font: inherit; }
+    .shell { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .skip-link {
+      position: fixed; left: 16px; top: -60px; z-index: 2000;
+      padding: 10px 16px; color: white; background: var(--ink);
+    }
+    .skip-link:focus { top: 12px; }
+    .beta-ribbon {
+      position: fixed; right: 14px; bottom: 14px; z-index: 1200;
+      padding: 7px 10px; border: 1px solid rgba(255,255,255,.28); border-radius: 4px;
+      color: white; background: rgba(16,28,34,.92); font-size: 10px; font-weight: 800;
+      text-transform: uppercase; box-shadow: 0 6px 18px rgba(16,28,34,.18);
+    }
+
+    header {
+      position: fixed; inset: 0 0 auto; z-index: 1000;
+      height: var(--header); background: rgba(16,28,34,.97);
+      border-bottom: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(12px);
+    }
+    .nav { height: 100%; display: flex; align-items: center; gap: 28px; }
+    .brand { width: 230px; height: 46px; display: inline-flex; align-items: center; overflow: hidden; text-decoration: none; flex: none; }
+    .brand-logo { width: 390px; height: 45px; max-width: none; object-fit: contain; object-position: left center; }
+    .nav-links { display: flex; align-items: center; gap: 25px; margin: 0 0 0 auto; padding: 0; list-style: none; }
+    .nav-links a {
+      position: relative; color: rgba(255,255,255,.78); text-decoration: none;
+      font-size: 14px; font-weight: 650; white-space: nowrap;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; right: 100%; bottom: -8px;
+      height: 2px; background: var(--teal); transition: right .2s ease;
+    }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { right: 0; }
+    .language-switcher {
+      display: inline-flex; align-items: center; padding: 3px;
+      border: 1px solid rgba(255,255,255,.18); border-radius: 6px; background: rgba(255,255,255,.08); flex: none;
+    }
+    .lang-btn {
+      min-width: 38px; height: 30px; padding: 0 8px; border: 0; border-radius: 4px;
+      color: rgba(255,255,255,.7); background: transparent; cursor: pointer; font-size: 12px; font-weight: 700;
+    }
+    .lang-btn[aria-pressed="true"] { color: var(--ink); background: white; }
+    .menu-btn {
+      display: none; width: 40px; height: 40px; padding: 9px; margin-left: auto;
+      border: 1px solid rgba(255,255,255,.24); border-radius: 5px; background: transparent; cursor: pointer;
+    }
+    .menu-btn span { display: block; width: 20px; height: 2px; margin: 4px 0; background: white; transition: .2s; }
+    .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .hero {
+      position: relative; min-height: min(760px, 92vh); margin-top: var(--header);
+      display: flex; align-items: center; overflow: hidden; background: #edf1ef;
+    }
+    .hero-media { position: absolute; inset: 0; }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 64% center; }
+    .hero-media::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(242,246,244,.98) 0%, rgba(242,246,244,.94) 34%, rgba(242,246,244,.38) 58%, rgba(242,246,244,.03) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; width: min(610px, 55%); padding: 86px 0 110px; }
+    .eyebrow { margin: 0 0 18px; color: var(--teal-dark); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .eyebrow::before { content: ""; display: inline-block; width: 28px; height: 2px; margin: 0 10px 4px 0; background: var(--coral); }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 { max-width: 560px; margin-bottom: 20px; font-size: clamp(52px, 6vw, 84px); line-height: .98; font-weight: 800; }
+    .hero-lead { max-width: 560px; margin-bottom: 32px; color: var(--ink-soft); font-size: clamp(18px, 2vw, 23px); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+      padding: 0 21px; border: 1px solid var(--ink); border-radius: 5px;
+      text-decoration: none; font-size: 14px; font-weight: 750; transition: .2s ease;
+    }
+    .button-primary { color: white; background: var(--ink); }
+    .button-primary:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+    .button-secondary { color: var(--ink); background: rgba(255,255,255,.72); }
+    .button-secondary:hover { color: white; background: var(--ink); }
+    .button .arrow { margin-left: 10px; font-size: 18px; line-height: 1; }
+    .hero-facts {
+      position: absolute; inset: auto 0 0; z-index: 2; color: white; background: rgba(16,28,34,.95);
+    }
+    .fact-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .fact { padding: 22px 24px; border-right: 1px solid rgba(255,255,255,.14); }
+    .fact:first-child { padding-left: 0; }
+    .fact:last-child { border-right: 0; }
+    .fact strong { display: block; color: var(--lime); font-size: 14px; }
+    .fact span { color: rgba(255,255,255,.72); font-size: 13px; }
+
+    section { position: relative; }
+    .section { padding: 104px 0; }
+    .section-alt { background: var(--mist); }
+    .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 70px; margin-bottom: 56px; align-items: end; }
+    .section-kicker { margin-bottom: 10px; color: var(--teal-dark); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .section-head h2, .journey-intro h2, .contact-copy h2 { margin-bottom: 0; font-size: clamp(34px, 4vw, 50px); line-height: 1.12; }
+    .section-head > p { max-width: 610px; margin: 0; color: var(--ink-soft); font-size: 17px; }
+
+    .capabilities { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+    .capability { padding: 34px 34px 10px 0; border-right: 1px solid var(--line); }
+    .capability + .capability { padding-left: 34px; }
+    .capability:last-child { border-right: 0; }
+    .capability-number { display: block; margin-bottom: 42px; color: var(--coral); font: 700 13px/1 monospace; }
+    .capability h3 { margin-bottom: 12px; font-size: 21px; }
+    .capability p { margin-bottom: 0; color: var(--ink-soft); font-size: 15px; }
+
+    .platform { padding: 0; background: var(--ink); color: white; }
+    .platform-grid { display: grid; grid-template-columns: 1.05fr .95fr; min-height: 580px; }
+    .platform-media { min-width: 0; overflow: hidden; }
+    .platform-media img { width: 100%; height: 100%; object-fit: cover; }
+    .platform-copy { display: flex; flex-direction: column; justify-content: center; padding: 70px clamp(34px, 7vw, 100px); }
+    .platform-copy .section-kicker { color: var(--lime); }
+    .platform-copy h2 { margin-bottom: 20px; font-size: clamp(34px, 4vw, 50px); line-height: 1.12; }
+    .platform-copy > p { color: rgba(255,255,255,.72); }
+    .feature-list { margin: 22px 0 0; padding: 0; list-style: none; }
+    .feature-list li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 15px 0; border-top: 1px solid rgba(255,255,255,.15); }
+    .feature-list b { color: var(--lime); }
+
+    .journey { overflow: hidden; }
+    .journey-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 90px; }
+    .journey-intro p:last-child { max-width: 440px; margin-top: 20px; color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 34px; }
+    .timeline::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 20px; width: 1px; background: var(--line); }
+    .milestone { position: relative; display: grid; grid-template-columns: 150px 1fr; gap: 32px; padding: 0 0 48px; }
+    .milestone:last-child { padding-bottom: 0; }
+    .milestone::before { content: ""; position: absolute; left: -33px; top: 5px; width: 13px; height: 13px; border: 3px solid white; background: var(--teal); box-shadow: 0 0 0 1px var(--teal); border-radius: 50%; }
+    .milestone.upcoming::before { background: var(--lime); box-shadow: 0 0 0 1px var(--lime); }
+    .milestone time { color: var(--teal-dark); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+    .milestone h3 { margin-bottom: 6px; font-size: 22px; }
+    .milestone p { margin-bottom: 0; color: var(--ink-soft); }
+
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .person { overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: white; }
+    .person-photo { aspect-ratio: 4 / 3; overflow: hidden; background: #e7ecea; }
+    .person-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .35s ease; }
+    .person:hover .person-photo img { transform: scale(1.025); }
+    .person-photo.compact img { object-fit: contain; padding-top: 10px; background: #f1f4f2; }
+    .person-photo.portrait-fit img { object-fit: contain; object-position: center bottom; padding: 10px 0 0; background: #f1f4f2; }
+    .person-info { min-height: 145px; padding: 22px; }
+    .person-info h3 { margin-bottom: 4px; font-size: 19px; }
+    .person-role { margin-bottom: 12px; color: var(--teal-dark); font-size: 13px; font-weight: 750; }
+    .person-bio { margin-bottom: 0; color: var(--ink-soft); font-size: 14px; }
+
+    .collaboration { padding: 72px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .collaboration-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+    .partner-lockup { padding: 26px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .partner-lockup strong { display: block; margin-bottom: 7px; font-size: 19px; }
+    .partner-lockup span { color: var(--ink-soft); }
+    .join-copy h2 { margin-bottom: 15px; font-size: clamp(30px, 3vw, 42px); line-height: 1.15; }
+    .join-copy p { color: var(--ink-soft); }
+
+    .contact { color: white; background: var(--teal-dark); }
+    .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 90px; align-items: end; }
+    .contact-copy .section-kicker { color: var(--lime); }
+    .contact-copy p:last-child { max-width: 680px; margin: 22px 0 0; color: rgba(255,255,255,.76); font-size: 17px; }
+    .contact-action { padding-left: 40px; border-left: 1px solid rgba(255,255,255,.25); }
+    .contact-label { margin-bottom: 8px; color: var(--lime); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .email { display: inline-block; margin-bottom: 22px; color: white; font-size: clamp(18px, 2vw, 25px); font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 5px; overflow-wrap: anywhere; }
+    .contact .button { color: var(--ink); border-color: white; background: white; }
+    .contact .button:hover { border-color: var(--lime); background: var(--lime); }
+
+    footer { padding: 34px 0; color: rgba(255,255,255,.62); background: var(--ink); font-size: 13px; }
+    .footer-grid { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer-brand { color: white; font-weight: 750; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { color: white; }
+
+    :focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media (max-width: 980px) {
+      :root { --header: 68px; }
+      .nav-links {
+        position: fixed; top: var(--header); left: 0; right: 0; height: calc(100vh - var(--header));
+        display: none; flex-direction: column; align-items: flex-start; gap: 0;
+        padding: 24px 20px 40px; margin: 0; background: white; overflow-y: auto;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; border-bottom: 1px solid var(--line); }
+      .nav-links a { display: block; padding: 17px 2px; color: var(--ink); font-size: 18px; }
+      .nav-links a::after { display: none; }
+      .language-switcher { margin-left: auto; }
+      .menu-btn { display: block; margin-left: auto; }
+      .hero-content { width: 64%; }
+      .section-head { grid-template-columns: 1fr; gap: 18px; }
+      .platform-grid { grid-template-columns: 1fr; }
+      .platform-media { height: 420px; }
+      .journey-grid { grid-template-columns: 1fr; gap: 54px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { gap: 50px; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(calc(100% - 30px), var(--max)); }
+      .brand { width: 165px; height: 38px; }
+      .brand-logo { width: 280px; height: 33px; }
+      .language-switcher { position: absolute; right: 62px; }
+      .lang-btn { min-width: 34px; padding: 0 5px; }
+      .hero { min-height: 720px; align-items: flex-start; }
+      .hero-media img { object-position: 68% center; }
+      .hero-media::after { background: rgba(242,246,244,.84); }
+      .hero-content { width: 100%; padding-top: 72px; }
+      .hero h1 { font-size: clamp(48px, 15vw, 68px); }
+      .hero-lead { max-width: 94%; font-size: 18px; }
+      .actions { flex-direction: column; align-items: stretch; width: min(100%, 340px); }
+      .hero-facts { position: absolute; }
+      .fact-grid { grid-template-columns: 1fr; }
+      .fact { padding: 10px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+      .fact:last-child { border-bottom: 0; }
+      .fact strong, .fact span { display: inline; }
+      .fact span::before { content: " · "; }
+      .section { padding: 76px 0; }
+      .section-head { margin-bottom: 38px; }
+      .capabilities { grid-template-columns: 1fr; }
+      .capability, .capability + .capability { padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .capability:last-child { border-bottom: 0; }
+      .capability-number { margin-bottom: 18px; }
+      .platform-media { height: 280px; }
+      .platform-copy { padding: 58px 15px; }
+      .timeline { padding-left: 28px; }
+      .milestone { grid-template-columns: 1fr; gap: 7px; }
+      .milestone::before { left: -27px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .person-info { min-height: 0; }
+      .collaboration-grid, .contact-grid { grid-template-columns: 1fr; gap: 46px; }
+      .contact-action { padding: 28px 0 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.25); }
+      .footer-grid { flex-direction: column; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="beta-ribbon" aria-label="Beta preview">Beta preview</div>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header>
+    <nav class="nav shell" aria-label="Primary navigation" data-i18n-aria="navAria">
+      <a class="brand" href="#home" aria-label="DeepSonix home">
+        <img class="brand-logo" src="Figures/logo.png" alt="DeepSonix 深声科技">
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#technology" data-i18n="navTechnology">Technology</a></li>
+        <li><a href="#platform" data-i18n="navPlatform">Platform</a></li>
+        <li><a href="#journey" data-i18n="navJourney">Journey</a></li>
+        <li><a href="#team" data-i18n="navTeam">Team</a></li>
+        <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+      </ul>
+      <div class="language-switcher" role="group" aria-label="Language" data-i18n-aria="languageAria">
+        <button class="lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" type="button" data-lang="zh-Hans" aria-pressed="false">简</button>
+        <button class="lang-btn" type="button" data-lang="zh-Hant" aria-pressed="false">繁</button>
+      </div>
+      <button class="menu-btn" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu" data-i18n-aria="menuAria">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="hero-media" aria-hidden="true"><img src="Figures/ndt_platform_3.jpg" alt=""></div>
+      <div class="shell">
+        <div class="hero-content">
+          <p class="eyebrow" data-i18n="heroEyebrow">Ultrasonic NDT · Hong Kong</p>
+          <h1>DeepSonix</h1>
+          <p class="hero-lead" data-i18n="heroLead">See beyond the surface. AI-powered ultrasound reveals hidden defects before they become critical.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#platform"><span data-i18n="explorePlatform">Explore the platform</span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="#contact" data-i18n="discussInspection">Discuss an inspection</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-facts">
+        <div class="shell fact-grid">
+          <div class="fact"><strong data-i18n="fact1Strong">Non-invasive</strong><span data-i18n="fact1Text">Contactless defect intelligence</span></div>
+          <div class="fact"><strong data-i18n="fact2Strong">AI-assisted</strong><span data-i18n="fact2Text">Signal-to-insight workflow</span></div>
+          <div class="fact"><strong data-i18n="fact3Strong">Built in Hong Kong</strong><span data-i18n="fact3Text">Research translated to industry</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="technology">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="section-kicker" data-i18n="technologyKicker">Our technology</p><h2 data-i18n="technologyTitle">Precision at every layer</h2></div>
+          <p data-i18n="technologyIntro">DeepSonix combines ultrasonic array scanning, advanced signal processing and deep learning to help semiconductor teams inspect faster and decide with confidence.</p>
+        </div>
+        <div class="capabilities">
+          <article class="capability"><span class="capability-number">01</span><h3 data-i18n="cap1Title">Array scanning</h3><p data-i18n="cap1Text">Capture consistent acoustic data across components with a non-invasive scanning architecture.</p></article>
+          <article class="capability"><span class="capability-number">02</span><h3 data-i18n="cap2Title">Signal intelligence</h3><p data-i18n="cap2Text">Separate meaningful features from noise through an advanced processing pipeline.</p></article>
+          <article class="capability"><span class="capability-number">03</span><h3 data-i18n="cap3Title">Defect insight</h3><p data-i18n="cap3Text">Turn complex ultrasonic responses into clear, actionable inspection results.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="platform" id="platform">
+      <div class="platform-grid">
+        <div class="platform-media"><img src="Figures/ultrasoundwave.png" alt="Ultrasonic signal visualisation" data-i18n-alt="platformImageAlt"></div>
+        <div class="platform-copy">
+          <p class="section-kicker" data-i18n="platformKicker">The platform</p>
+          <h2 data-i18n="platformTitle">From sound wave to production decision</h2>
+          <p data-i18n="platformIntro">A connected inspection workflow designed for semiconductor devices and high-value components.</p>
+          <ul class="feature-list">
+            <li><b>01</b><span data-i18n="feature1">Rapid, repeatable ultrasonic acquisition</span></li>
+            <li><b>02</b><span data-i18n="feature2">Automated processing and feature extraction</span></li>
+            <li><b>03</b><span data-i18n="feature3">Visual results for engineering review</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section journey" id="journey">
+      <div class="shell journey-grid">
+        <div class="journey-intro">
+          <p class="section-kicker" data-i18n="journeyKicker">Company timeline</p>
+          <h2 data-i18n="journeyTitle">Built through research, shaped for industry</h2>
+          <p data-i18n="journeyIntro">Our path from an early-stage idea to an innovation company entering incubation.</p>
+        </div>
+        <div class="timeline">
+          <article class="milestone"><time datetime="2025-02-01" data-i18n="dateIdeation">01 Feb 2025</time><div><h3 data-i18n="ideationTitle">HKSTP Ideation</h3><p data-i18n="ideationText">DeepSonix entered the HKSTP Ideation Programme to shape its technology and commercial path.</p></div></article>
+          <article class="milestone"><time datetime="2025-04-11" data-i18n="dateFounded">11 Apr 2025</time><div><h3 data-i18n="foundedTitle">DeepSonix Limited founded</h3><p data-i18n="foundedText">The company was incorporated in Hong Kong to bring advanced ultrasonic inspection to industry.</p></div></article>
+          <article class="milestone upcoming"><time datetime="2026-08-03" data-i18n="dateIncubation">03 Aug 2026</time><div><h3 data-i18n="incubationTitle">Incubation</h3><p data-i18n="incubationText">DeepSonix joins incubation to accelerate product development, validation and market adoption.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="team">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="section-kicker" data-i18n="teamKicker">Our people</p><h2 data-i18n="teamTitle">One team, multiple disciplines</h2></div>
+          <p data-i18n="teamIntro">Researchers, engineers and operators working together across acoustics, AI, mechanical systems and company building.</p>
+        </div>
+        <div class="team-grid">
+          <article class="person"><div class="person-photo"><img src="Figures/WNLee_photo.jpg" alt="Professor W. N. Lee" loading="lazy"></div><div class="person-info"><h3 data-i18n="leeName">Professor W. N. Lee</h3><p class="person-role" data-i18n="leeRole">Chief Scientific Advisor</p><p class="person-bio" data-i18n="leeBio">Associate Professor at HKU with two decades of acoustics research experience.</p></div></article>
+          <article class="person"><div class="person-photo compact"><img src="Figures/Kelementine.png" alt="Klementine Wai" loading="lazy"></div><div class="person-info"><h3 data-i18n="klementineName">Klementine Wai</h3><p class="person-role" data-i18n="klementineRole">Chief Executive Officer</p><p class="person-bio" data-i18n="klementineBio">Leading company strategy, operations and growth.</p></div></article>
+          <article class="person"><div class="person-photo"><img src="Figures/dai_bingze.jpg" alt="Bingze Dai" loading="lazy"></div><div class="person-info"><h3 data-i18n="daiName">Bingze Dai</h3><p class="person-role" data-i18n="daiRole">Chief Scientist</p><p class="person-bio" data-i18n="daiBio">HKU doctoral researcher and founder of SoundSense.</p></div></article>
+          <article class="person"><div class="person-photo"><img src="Figures/ly.jpg" alt="Yang Leng" loading="lazy"></div><div class="person-info"><h3 data-i18n="lengName">Yang Leng</h3><p class="person-role" data-i18n="lengRole">Chief AI Officer</p><p class="person-bio" data-i18n="lengBio">Doctoral researcher in Electrical and Electronic Engineering at HKU.</p></div></article>
+          <article class="person"><div class="person-photo portrait-fit"><img src="Figures/ysq.png" alt="Shiqi Yang" loading="lazy"></div><div class="person-info"><h3 data-i18n="yangName">Shiqi Yang</h3><p class="person-role" data-i18n="yangRole">Chief Mechanical Engineer</p><p class="person-bio" data-i18n="yangBio">Doctoral researcher in Electrical and Electronic Engineering at HKU.</p></div></article>
+          <article class="person"><div class="person-photo compact"><img src="Figures/Issac.png" alt="Issac Leung" loading="lazy"></div><div class="person-info"><h3 data-i18n="issacName">Issac Leung</h3><p class="person-role" data-i18n="issacRole">R&amp;D Engineer</p><p class="person-bio" data-i18n="issacBio">Advancing the inspection platform from research to deployment.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="collaboration">
+      <div class="shell collaboration-grid">
+        <div>
+          <p class="section-kicker" data-i18n="partnerKicker">Academic collaboration</p>
+          <div class="partner-lockup"><strong data-i18n="partnerName">Advanced Alloys Laboratory</strong><span data-i18n="partnerOrg">Department of Mechanical Engineering, The University of Hong Kong</span></div>
+        </div>
+        <div class="join-copy"><h2 data-i18n="joinTitle">Solve a hard inspection problem with us</h2><p data-i18n="joinText">We welcome conversations with semiconductor manufacturers, research teams and engineering partners.</p><a class="button button-primary" href="mailto:deepsonix.hr@gmail.com?subject=DeepSonix%20collaboration"><span data-i18n="startConversation">Start a conversation</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="shell contact-grid">
+        <div class="contact-copy"><p class="section-kicker" data-i18n="contactKicker">Contact</p><h2 data-i18n="contactTitle">Bring clarity to what lies beneath</h2><p data-i18n="contactText">Tell us about your component, material or inspection challenge. Our team will follow up to explore the right next step.</p></div>
+        <div class="contact-action"><p class="contact-label" data-i18n="emailLabel">Email our team</p><a class="email" href="mailto:deepsonix.hr@gmail.com">deepsonix.hr@gmail.com</a><br><a class="button" href="mailto:deepsonix.hr@gmail.com?subject=Inspection%20enquiry"><span data-i18n="sendEnquiry">Send an enquiry</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div><span class="footer-brand">DeepSonix Limited</span> · <span data-i18n="footerLine">Ultrasonic intelligence for critical inspection.</span></div>
+      <div class="footer-links"><a href="#technology" data-i18n="navTechnology">Technology</a><a href="#journey" data-i18n="navJourney">Journey</a><a href="#team" data-i18n="navTeam">Team</a><a href="#contact" data-i18n="navContact">Contact</a></div>
+      <div>© <span id="year"></span> DeepSonix Limited</div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        title: "DeepSonix | See Beyond the Surface", skip: "Skip to content", navAria: "Primary navigation", languageAria: "Language", menuAria: "Open menu",
+        navTechnology: "Technology", navPlatform: "Platform", navJourney: "Journey", navTeam: "Team", navContact: "Contact",
+        heroEyebrow: "Ultrasonic NDT · Hong Kong", heroLead: "See beyond the surface. AI-powered ultrasound reveals hidden defects before they become critical.", explorePlatform: "Explore the platform", discussInspection: "Discuss an inspection",
+        fact1Strong: "Non-invasive", fact1Text: "Contactless defect intelligence", fact2Strong: "AI-assisted", fact2Text: "Signal-to-insight workflow", fact3Strong: "Built in Hong Kong", fact3Text: "Research translated to industry",
+        technologyKicker: "Our technology", technologyTitle: "Precision at every layer", technologyIntro: "DeepSonix combines ultrasonic array scanning, advanced signal processing and deep learning to help semiconductor teams inspect faster and decide with confidence.",
+        cap1Title: "Array scanning", cap1Text: "Capture consistent acoustic data across components with a non-invasive scanning architecture.", cap2Title: "Signal intelligence", cap2Text: "Separate meaningful features from noise through an advanced processing pipeline.", cap3Title: "Defect insight", cap3Text: "Turn complex ultrasonic responses into clear, actionable inspection results.",
+        platformImageAlt: "Ultrasonic signal visualisation", platformKicker: "The platform", platformTitle: "From sound wave to production decision", platformIntro: "A connected inspection workflow designed for semiconductor devices and high-value components.", feature1: "Rapid, repeatable ultrasonic acquisition", feature2: "Automated processing and feature extraction", feature3: "Visual results for engineering review",
+        journeyKicker: "Company timeline", journeyTitle: "Built through research, shaped for industry", journeyIntro: "Our path from an early-stage idea to an innovation company entering incubation.", dateIdeation: "01 Feb 2025", ideationTitle: "HKSTP Ideation", ideationText: "DeepSonix entered the HKSTP Ideation Programme to shape its technology and commercial path.", dateFounded: "11 Apr 2025", foundedTitle: "DeepSonix Limited founded", foundedText: "The company was incorporated in Hong Kong to bring advanced ultrasonic inspection to industry.", dateIncubation: "03 Aug 2026", incubationTitle: "Incubation", incubationText: "DeepSonix joins incubation to accelerate product development, validation and market adoption.",
+        teamKicker: "Our people", teamTitle: "One team, multiple disciplines", teamIntro: "Researchers, engineers and operators working together across acoustics, AI, mechanical systems and company building.",
+        klementineName: "Klementine Wai", klementineRole: "Chief Executive Officer", klementineBio: "Leading company strategy, operations and growth.", issacName: "Issac Leung", issacRole: "R&D Engineer", issacBio: "Advancing the inspection platform from research to deployment.", leeName: "Professor W. N. Lee", leeRole: "Chief Scientific Advisor", leeBio: "Associate Professor at HKU with two decades of acoustics research experience.", daiName: "Bingze Dai", daiRole: "Chief Scientist", daiBio: "HKU doctoral researcher and founder of SoundSense.", lengName: "Yang Leng", lengRole: "Chief AI Officer", lengBio: "Doctoral researcher in Electrical and Electronic Engineering at HKU.", yangName: "Shiqi Yang", yangRole: "Chief Mechanical Engineer", yangBio: "Doctoral researcher in Electrical and Electronic Engineering at HKU.",
+        partnerKicker: "Academic collaboration", partnerName: "Advanced Alloys Laboratory", partnerOrg: "Department of Mechanical Engineering, The University of Hong Kong", joinTitle: "Solve a hard inspection problem with us", joinText: "We welcome conversations with semiconductor manufacturers, research teams and engineering partners.", startConversation: "Start a conversation",
+        contactKicker: "Contact", contactTitle: "Bring clarity to what lies beneath", contactText: "Tell us about your component, material or inspection challenge. Our team will follow up to explore the right next step.", emailLabel: "Email our team", sendEnquiry: "Send an enquiry", footerLine: "Ultrasonic intelligence for critical inspection."
+      },
+      "zh-Hans": {
+        title: "DeepSonix | 洞见表面之下", skip: "跳至主要内容", navAria: "主导航", languageAria: "显示语言", menuAria: "打开菜单",
+        navTechnology: "核心技术", navPlatform: "检测平台", navJourney: "公司历程", navTeam: "团队", navContact: "联系我们",
+        heroEyebrow: "超声无损检测 · 香港", heroLead: "洞见表面之下。以人工智能驱动超声检测，在隐患演变为关键问题之前识别缺陷。", explorePlatform: "探索检测平台", discussInspection: "咨询检测方案",
+        fact1Strong: "非侵入式", fact1Text: "无接触缺陷识别", fact2Strong: "人工智能辅助", fact2Text: "从信号到洞察", fact3Strong: "立足香港", fact3Text: "推动科研成果产业化",
+        technologyKicker: "核心技术", technologyTitle: "精准洞察每一层", technologyIntro: "DeepSonix 融合超声阵列扫描、先进信号处理与深度学习，协助半导体团队提升检测效率，做出更可靠的决策。",
+        cap1Title: "阵列扫描", cap1Text: "通过非侵入式扫描架构，稳定采集元器件的声学数据。", cap2Title: "信号智能", cap2Text: "利用先进处理流程，从复杂噪声中提取关键特征。", cap3Title: "缺陷洞察", cap3Text: "将复杂的超声响应转化为清晰、可执行的检测结果。",
+        platformImageAlt: "超声信号可视化", platformKicker: "检测平台", platformTitle: "从声波信号到生产决策", platformIntro: "面向半导体器件与高价值元器件的一体化检测流程。", feature1: "快速、可重复的超声数据采集", feature2: "自动化信号处理与特征提取", feature3: "面向工程评审的可视化结果",
+        journeyKicker: "公司时间线", journeyTitle: "源于科研，服务产业", journeyIntro: "从早期构想到科技公司，再迈向孵化发展的历程。", dateIdeation: "2025年2月1日", ideationTitle: "入选 HKSTP Ideation", ideationText: "DeepSonix 加入香港科技园 Ideation 计划，明确技术方向与商业路径。", dateFounded: "2025年4月11日", foundedTitle: "DeepSonix Limited 成立", foundedText: "公司于香港正式成立，致力将先进超声检测技术带入产业。", dateIncubation: "2026年8月3日", incubationTitle: "进入孵化计划", incubationText: "DeepSonix 进入孵化阶段，加速产品研发、验证与市场应用。",
+        teamKicker: "核心团队", teamTitle: "跨学科，共同推进", teamIntro: "来自声学、人工智能、机械系统与公司运营领域的研究人员、工程师和管理团队。",
+        klementineName: "韦嘉婷 (Klementine)", klementineRole: "首席执行官", klementineBio: "负责公司战略、运营与业务增长。", issacName: "梁智祈 (Issac)", issacRole: "研发工程师", issacBio: "推动检测平台从科研成果走向工程应用。", leeName: "李维宁教授", leeRole: "首席专家顾问", leeBio: "香港大学副教授，拥有二十年声学研究经验。", daiName: "戴秉泽", daiRole: "首席科学家", daiBio: "香港大学博士研究生，SoundSense 创始人。", lengName: "冷阳", lengRole: "首席人工智能技术官", lengBio: "香港大学电子电机工程系博士研究生。", yangName: "杨诗麒", yangRole: "首席机械工程师", yangBio: "香港大学电子电机工程系博士研究生。",
+        partnerKicker: "学术合作", partnerName: "Advanced Alloys Laboratory", partnerOrg: "香港大学机械工程系", joinTitle: "与我们共同解决高难度检测问题", joinText: "我们期待与半导体制造商、研究团队及工程合作伙伴展开交流。", startConversation: "展开合作交流",
+        contactKicker: "联系我们", contactTitle: "洞悉材料与器件内部", contactText: "告诉我们您的元器件、材料或检测挑战，团队将与您联系，共同评估合适的下一步方案。", emailLabel: "发送邮件", sendEnquiry: "提交咨询", footerLine: "以超声智能赋能关键检测。"
+      },
+      "zh-Hant": {
+        title: "DeepSonix | 洞見表面之下", skip: "跳至主要內容", navAria: "主導覽", languageAria: "顯示語言", menuAria: "開啟選單",
+        navTechnology: "核心技術", navPlatform: "檢測平台", navJourney: "公司歷程", navTeam: "團隊", navContact: "聯絡我們",
+        heroEyebrow: "超聲無損檢測 · 香港", heroLead: "洞見表面之下。以人工智能驅動超聲檢測，在隱患演變為關鍵問題之前識別缺陷。", explorePlatform: "探索檢測平台", discussInspection: "諮詢檢測方案",
+        fact1Strong: "非侵入式", fact1Text: "無接觸缺陷識別", fact2Strong: "人工智能輔助", fact2Text: "從訊號到洞察", fact3Strong: "立足香港", fact3Text: "推動科研成果產業化",
+        technologyKicker: "核心技術", technologyTitle: "精準洞察每一層", technologyIntro: "DeepSonix 融合超聲陣列掃描、先進訊號處理與深度學習，協助半導體團隊提升檢測效率，作出更可靠的決策。",
+        cap1Title: "陣列掃描", cap1Text: "透過非侵入式掃描架構，穩定擷取元器件的聲學數據。", cap2Title: "訊號智能", cap2Text: "利用先進處理流程，從複雜雜訊中提取關鍵特徵。", cap3Title: "缺陷洞察", cap3Text: "將複雜的超聲響應轉化為清晰、可執行的檢測結果。",
+        platformImageAlt: "超聲訊號視覺化", platformKicker: "檢測平台", platformTitle: "從聲波訊號到生產決策", platformIntro: "面向半導體器件與高價值元器件的一體化檢測流程。", feature1: "快速、可重複的超聲數據擷取", feature2: "自動化訊號處理與特徵提取", feature3: "面向工程評審的視覺化結果",
+        journeyKicker: "公司時間線", journeyTitle: "源於科研，服務產業", journeyIntro: "從早期構想到科技公司，再邁向孵化發展的歷程。", dateIdeation: "2025年2月1日", ideationTitle: "入選 HKSTP Ideation", ideationText: "DeepSonix 加入香港科技園 Ideation 計劃，明確技術方向與商業路徑。", dateFounded: "2025年4月11日", foundedTitle: "DeepSonix Limited 成立", foundedText: "公司於香港正式成立，致力將先進超聲檢測技術帶入產業。", dateIncubation: "2026年8月3日", incubationTitle: "進入孵化計劃", incubationText: "DeepSonix 進入孵化階段，加速產品研發、驗證與市場應用。",
+        teamKicker: "核心團隊", teamTitle: "跨學科，共同推進", teamIntro: "來自聲學、人工智能、機械系統與公司營運領域的研究人員、工程師和管理團隊。",
+        klementineName: "韋嘉婷 (Klementine)", klementineRole: "首席執行官", klementineBio: "負責公司策略、營運與業務增長。", issacName: "梁智祈 (Issac)", issacRole: "研發工程師", issacBio: "推動檢測平台從科研成果走向工程應用。", leeName: "李維寧教授", leeRole: "首席專家顧問", leeBio: "香港大學副教授，擁有二十年聲學研究經驗。", daiName: "戴秉澤", daiRole: "首席科學家", daiBio: "香港大學博士研究生，SoundSense 創辦人。", lengName: "冷陽", lengRole: "首席人工智能技術官", lengBio: "香港大學電子電機工程系博士研究生。", yangName: "楊詩麒", yangRole: "首席機械工程師", yangBio: "香港大學電子電機工程系博士研究生。",
+        partnerKicker: "學術合作", partnerName: "Advanced Alloys Laboratory", partnerOrg: "香港大學機械工程系", joinTitle: "與我們共同解決高難度檢測問題", joinText: "我們期待與半導體製造商、研究團隊及工程合作夥伴展開交流。", startConversation: "展開合作交流",
+        contactKicker: "聯絡我們", contactTitle: "洞悉材料與器件內部", contactText: "告訴我們您的元器件、材料或檢測挑戰，團隊將與您聯絡，共同評估合適的下一步方案。", emailLabel: "傳送電郵", sendEnquiry: "提交查詢", footerLine: "以超聲智能賦能關鍵檢測。"
+      }
+    };
+
+    const languageButtons = document.querySelectorAll("[data-lang]");
+    const menuButton = document.querySelector(".menu-btn");
+    const navLinks = document.querySelector(".nav-links");
+
+    function setLanguage(language) {
+      const selected = translations[language] ? language : "en";
+      const content = translations[selected];
+      document.documentElement.lang = selected;
+      document.title = content.title;
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const value = content[element.dataset.i18n];
+        if (value) element.textContent = value;
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+        const value = content[element.dataset.i18nAria];
+        if (value) element.setAttribute("aria-label", value);
+      });
+      document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+        const value = content[element.dataset.i18nAlt];
+        if (value) element.alt = value;
+      });
+      languageButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.lang === selected)));
+      try { localStorage.setItem("deepsonix-language", selected); } catch (_) {}
+    }
+
+    function closeMenu() {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    }
+
+    languageButtons.forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.lang)));
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+      navLinks.classList.toggle("open", !isOpen);
+      document.body.classList.toggle("menu-open", !isOpen);
+    });
+    navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+    window.addEventListener("resize", () => { if (window.innerWidth > 980) closeMenu(); });
+
+    let preferredLanguage = "en";
+    try { preferredLanguage = localStorage.getItem("deepsonix-language") || "en"; } catch (_) {}
+    setLanguage(preferredLanguage);
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
